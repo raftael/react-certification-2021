@@ -1,37 +1,37 @@
-import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-
-import { useAuth } from '../../providers/Auth';
+import React, { useEffect, useRef, useState } from 'react';
 import './Home.styles.css';
 
 function HomePage() {
-  const history = useHistory();
   const sectionRef = useRef(null);
-  const { authenticated, logout } = useAuth();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [videosList, setVideosList] = useState([]);
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/');
-  }
+  useEffect(() => {
+    fetch("https://gist.githubusercontent.com/jparciga/1d4dd34fb06ba74237f8966e2e777ff5/raw/f3af25f1505deb67e2cc9ee625a633f24d8983ff/youtube-videos-mock.json")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setIsLoaded(true);
+        setVideosList(result.items);
+      },
+      (error) => {
+        setIsLoaded(true);
+        console.log(error)
+      }
+    )
+  }, [])
 
   return (
     <section className="homepage" ref={sectionRef}>
       <h1>Hello stranger!</h1>
-      {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
-            <Link to="/" onClick={deAuthenticate}>
-              ← logout
-            </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )}
+      <ul>
+        {videosList.map(video => (
+          <li key={video.etag}> 
+            {video.snippet.title}
+            
+          </li>
+        ))}
+        </ul>
     </section>
   );
 }
