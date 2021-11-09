@@ -4,7 +4,7 @@ const storage = {
       const rawValue = window.localStorage.getItem(key);
       return JSON.parse(rawValue);
     } catch (error) {
-      console.error(`Error parsing storage item "${key}".`);
+      // console.error(`Error parsing storage item "${key}".`);
       return null;
     }
   },
@@ -14,4 +14,4 @@ const storage = {
   },
 };
 
-export { storage };
+export default { storage };
