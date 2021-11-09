@@ -1,20 +1,28 @@
 ```
 < Delete this code block >
+
 - All code blocks must be preliminarily deleted in this page unless a block of code needs to be included.
 - Fill all the sections with plain text unless a different formatting (quote, code block, etc.) is needed.
 ```
+
 <br/>
+
 ## Description
+
 ```
 < Replace with the PR description >
+
 - Include a summary of the change and which issue, if any, has been fixed.
 - Include a relevant motivation and a context.
 - List any dependencies that are required for this change.
 ```
+
 ## Type of Change
+
 ```
 Delete options that are not relevant.
 ```
+
 - [x] Bug fix (non-breaking change which fixes an issue)
 - [x] New feature (non-breaking change which adds functionality)
 - [x] Breaking change (fix or feature that would cause existing functionality to not work as expected)
@@ -27,14 +35,19 @@ Delete options that are not relevant.
 - [x] Continuous Integrations (Changes to our CI configuration files and scripts)
 - [x] Chores (Other changes that don't modify src or test files)
 - [x] Reverts (Reverts a previous commit)
+
 ## How Has This Been Tested?
+
 ```
 < Replace with test details >
+
 - Describe the tests that you ran to verify your changes.
 - Provide detailed instructions so that the reviewers can easily verify the PR.
 - List any relevant details for your test configuration
 ```
+
 # Checklist:
+
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] My changes generate no new warnings or errors
