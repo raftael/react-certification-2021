@@ -1,13 +1,6 @@
 import React from 'react';
-// import './Layout.styles.css';
-import { makeStyles } from '@material-ui/core/styles';
 import Header from './Header/Header.component';
-
-const useStyles = makeStyles(() => ({
-  container: {
-    flexGrow: 1,
-  },
-}));
+import useStyles from './Layout.styles';
 
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
