@@ -9,12 +9,8 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </Layout>
     </BrowserRouter>
