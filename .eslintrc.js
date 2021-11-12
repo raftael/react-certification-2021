@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true
   },
   extends: [
     'eslint:recommended',
@@ -25,6 +26,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    "react/jsx-wrap-multilines": "off"
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
 };
