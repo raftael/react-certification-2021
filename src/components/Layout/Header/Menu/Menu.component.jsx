@@ -13,6 +13,7 @@ export default function MenuBar(props) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={props.handleMenuClose}
+      data-testid="menu"
     >
       <MenuItem onClick={props.handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={props.handleMenuClose}>My account</MenuItem>

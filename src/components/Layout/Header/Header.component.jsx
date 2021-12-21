@@ -26,7 +26,7 @@ export default function Header() {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.grow} data-testid="header">
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -59,6 +59,7 @@ export default function Header() {
                   onChange={handleChange}
                   name="checked"
                   color="primary"
+                  data-testid="menu-switch"
                 />
               }
               label="Dark mode"

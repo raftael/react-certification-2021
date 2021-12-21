@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  card_size: {
+  cardSize: {
     maxWidth: 345,
     height: 350,
   },

@@ -13,7 +13,7 @@ export default function VideoCard(props) {
   const { title, image, description } = props;
 
   return (
-    <Card className={classes.card_size}>
+    <Card className={classes.cardSize} data-testid="video-card">
       <CardActionArea>
         <CardMedia
           component="img"

@@ -14,16 +14,23 @@ function HomePage() {
   }
   return (
     <>
-      <Typography gutterBottom variant="h2" component="div" className={classes.title}>
+      <Typography
+        gutterBottom
+        variant="h2"
+        component="div"
+        className={classes.title}
+        data-testid="title"
+      >
         Welcome to the challenge!
       </Typography>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} data-testid="grid-container">
         {data.map((video) => (
           <Grid item xs={6} md={3} key={video.etag}>
             <VideoCard
               title={video.snippet.title}
               image={video.snippet.thumbnails.medium.url}
               description={video.snippet.description}
+              data-testid="videocard"
             />
           </Grid>
         ))}
