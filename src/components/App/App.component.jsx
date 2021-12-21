@@ -9,8 +9,8 @@ import { VideoContextWrapper } from '../../context/VideoContext';
 function App() {
   return (
     <div data-testid="app-div">
-      <VideoContextWrapper>
-        <BrowserRouter>
+      <BrowserRouter>
+        <VideoContextWrapper>
           <Layout>
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -18,8 +18,8 @@ function App() {
               <Route path="*" component={NotFound} />
             </Switch>
           </Layout>
-        </BrowserRouter>
-      </VideoContextWrapper>
+        </VideoContextWrapper>
+      </BrowserRouter>
     </div>
   );
 }

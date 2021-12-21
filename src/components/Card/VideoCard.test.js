@@ -1,5 +1,6 @@
 import React from 'react';
 import { cleanup, render as rtlRender, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import VideoCard from './VideoCard.component';
 import { VideoContextWrapper } from '../../context/VideoContext';
 
@@ -7,7 +8,11 @@ afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
-    return <VideoContextWrapper {...props} />;
+    return (
+      <BrowserRouter>
+        <VideoContextWrapper {...props} />
+      </BrowserRouter>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 }
