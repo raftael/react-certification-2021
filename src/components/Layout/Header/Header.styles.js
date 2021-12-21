@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+    // '&:hover': {
+    //   backgroundColor: alpha(theme.palette.common.white, 0.25),
+    // },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
@@ -27,15 +27,23 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+    textDecoration: 'none',
+    color: 'white',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
-    pointerEvents: 'none',
+    color: 'white',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#d3d3d3',
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    zIndex: 999,
   },
   inputRoot: {
     color: 'inherit',

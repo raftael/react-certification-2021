@@ -1,40 +1,44 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import useYoutube from '../../utils/hooks/useYoutube';
+import useFetch from '../../utils/hooks/useFetch';
+import YoutubeService from '../../utils/services/YoutubeService';
+import { DEVENV } from '../../config';
 import VideoCard from '../../components/Card';
 import Error from '../../components/ErrorMessage';
 import useStyles from './Home.styles';
+import { useVideoContext } from '../../context/VideoContext';
 
 function HomePage() {
-  const { data, errorMessage } = useYoutube();
+  const { state } = useVideoContext();
+  const endpoint = DEVENV ? YoutubeService.devSearch : YoutubeService.search;
+  const { data, loading, error } = useFetch(endpoint, state.search);
   const classes = useStyles();
-  if (errorMessage) {
-    return <Error errorMessage={errorMessage} />;
+
+  if (error) {
+    return <Error errorMessage={error} />;
   }
   return (
     <>
-      <Typography
-        gutterBottom
-        variant="h2"
-        component="div"
-        className={classes.title}
-        data-testid="title"
-      >
-        Welcome to the challenge!
-      </Typography>
-      <Grid container spacing={4} data-testid="grid-container">
-        {data.map((video) => (
-          <Grid item xs={6} md={3} key={video.etag}>
-            <VideoCard
-              title={video.snippet.title}
-              image={video.snippet.thumbnails.medium.url}
-              description={video.snippet.description}
-              data-testid="videocard"
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {loading ? (
+        <div data-testid="loading-div">
+          <h3> Loading videos... </h3>
+        </div>
+      ) : (
+        <Grid container spacing={4} data-testid="grid-container" className={classes.grid}>
+          {data.map((video) => (
+            <Grid item xs={6} md={3} key={video.etag}>
+              <VideoCard
+                id={video.id.videoId}
+                title={video.snippet.title}
+                image={video.snippet.thumbnails.medium.url}
+                description={video.snippet.description}
+                isDetailPage={false}
+                data-testid="video-card"
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 }

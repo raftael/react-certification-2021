@@ -1,22 +1,24 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render as rtlRender } from '@testing-library/react';
 import Home from './Home.page';
+import { VideoContextWrapper } from '../../context/VideoContext';
+
+afterEach(cleanup);
+
+function render(ui, options) {
+  function Wrapper(props) {
+    return <VideoContextWrapper {...props} />;
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...options });
+}
 
 describe('Validating Home page', () => {
-  test('Should exist title div', () => {
-    const { getByTestId } = render(<Home />);
-    expect(getByTestId('title')).toBeInTheDocument();
+  let getByTestId;
+  beforeEach(() => {
+    ({ getByTestId } = render(<Home />));
   });
 
-  test('Should exist grid container div', () => {
-    const { getByTestId } = render(<Home />);
-    expect(getByTestId('grid-container')).toBeInTheDocument();
-  });
-
-  test('Should exist videocard div', () => {
-    const { getByTestId } = render(<Home />);
-    setTimeout(() => {
-      expect(getByTestId('videocard')).toBeInTheDocument();
-    }, 300);
+  test('Should exist loading container div', () => {
+    expect(getByTestId('loading-div')).toBeInTheDocument();
   });
 });

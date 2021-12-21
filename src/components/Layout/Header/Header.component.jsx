@@ -10,16 +10,20 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import useStyles from './Header.styles';
+import { Types } from '../../../context/VideoReducer';
+import { useVideoContext } from '../../../context/VideoContext';
 
 export default function Header() {
   const classes = useStyles();
+  const { state, dispatch } = useVideoContext();
+  const [query, setQuery] = useState(null);
 
-  const [state, setState] = useState({
-    checked: false,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const handleChangeTheme = (e) => {
+    dispatch({ type: Types.CHANGE_THEME, value: e.target.checked });
+  };
+  const handleClickSearch = (e) => {
+    e.preventDefault();
+    if (query && query !== '') dispatch({ type: Types.SEARCH, value: query });
   };
 
   const menuId = 'primary-search-account-menu';
@@ -38,9 +42,16 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
+            <div
+              className={classes.searchIcon}
+              onClick={handleClickSearch}
+              onKeyDown={handleClickSearch}
+              role="button"
+              tabIndex={0}
+            >
               <SearchIcon />
             </div>
+
             <InputBase
               placeholder="Wizeline…"
               classes={{
@@ -48,6 +59,7 @@ export default function Header() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <div className={classes.grow} />
@@ -55,8 +67,8 @@ export default function Header() {
             <FormControlLabel
               control={
                 <Switch
-                  checked={state.checked}
-                  onChange={handleChange}
+                  checked={state.themeDark}
+                  onChange={handleChangeTheme}
                   name="checked"
                   color="primary"
                   data-testid="menu-switch"

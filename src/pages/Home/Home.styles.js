@@ -5,6 +5,12 @@ const useStyles = makeStyles({
     padding: 30,
     textAlign: 'center',
   },
+  grid: {
+    marginTop: 40,
+    marginBottom: 40,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
 });
 
 export default useStyles;
