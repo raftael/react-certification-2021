@@ -11,6 +11,13 @@ const useStyles = makeStyles({
     paddingLeft: 30,
     paddingRight: 30,
   },
+  loader: {
+    width: '100%',
+    height: 'auto',
+    marginTop: 150,
+    textAlign: 'center',
+    backgroundColor: 'white',
+  },
 });
 
 export default useStyles;

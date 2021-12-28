@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  loader: {
+  loading: {
     width: '100%',
     height: 'auto',
-    marginTop: 50,
+    marginTop: 150,
     textAlign: 'center',
     backgroundColor: 'white',
   },

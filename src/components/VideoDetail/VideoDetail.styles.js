@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     minHeight: 300,
     maxHeight: 600,
+    marginTop: 40,
+  },
+  gridRelated: {
+    marginTop: 40,
+  },
+  loading: {
+    textAlign: 'center',
   },
 }));
 

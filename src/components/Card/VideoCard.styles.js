@@ -1,4 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  BG_DARK_CARD,
+  BG_LIGHT_CARD,
+  COLOR_DARK_TEXT,
+  COLOR_LIGHT_TEXT,
+} from '../../utils/constants';
 
 const useStyles = makeStyles({
   cardSize: {
@@ -15,6 +21,17 @@ const useStyles = makeStyles({
   },
   cardContent: {
     height: '100%',
+  },
+  bgDark: {
+    backgroundColor: BG_DARK_CARD,
+    color: COLOR_DARK_TEXT,
+  },
+  bgLight: {
+    backgroundColor: BG_LIGHT_CARD,
+    color: COLOR_LIGHT_TEXT,
+  },
+  textDescription: {
+    color: 'gray',
   },
 });
 

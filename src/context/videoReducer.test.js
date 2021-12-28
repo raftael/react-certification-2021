@@ -11,7 +11,6 @@ describe('video reducer', () => {
       value: 'reactjs',
     };
     const expectedState = {
-      themeDark: false,
       search: 'reactjs',
       videoId: 0,
     };
@@ -25,23 +24,8 @@ describe('video reducer', () => {
       value: '123abc',
     };
     const expectedState = {
-      themeDark: false,
       search: 'wizeline',
       videoId: '123abc',
-    };
-
-    expect(VideoReducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle CHANGE_THEME', () => {
-    const action = {
-      type: Types.CHANGE_THEME,
-      value: true,
-    };
-    const expectedState = {
-      themeDark: true,
-      search: 'wizeline',
-      videoId: 0,
     };
 
     expect(VideoReducer(initialState, action)).toEqual(expectedState);

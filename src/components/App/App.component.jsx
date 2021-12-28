@@ -1,24 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import HomePage from '../../pages/Home';
-import VideoDetailPage from '../../pages/VideoDetail';
-import NotFound from '../../pages/NotFound';
+import { BrowserRouter } from 'react-router-dom';
 import Layout from '../Layout';
+import Routes from '../Routes';
 import { VideoContextWrapper } from '../../context/VideoContext';
+import { ThemeContextWrapper } from '../../context/Theme/ThemeContext';
 
 function App() {
   return (
     <div data-testid="app-div">
       <BrowserRouter>
-        <VideoContextWrapper>
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/watch/:videoId" component={VideoDetailPage} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </Layout>
-        </VideoContextWrapper>
+        <ThemeContextWrapper>
+          <VideoContextWrapper>
+            <Layout>
+              <Routes />
+            </Layout>
+          </VideoContextWrapper>
+        </ThemeContextWrapper>
       </BrowserRouter>
     </div>
   );

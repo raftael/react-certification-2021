@@ -9,11 +9,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import parse from 'html-react-parser';
 import useStyles from './VideoCard.styles';
 import { useVideoContext } from '../../context/VideoContext';
+import { useThemeContext } from '../../context/Theme/ThemeContext';
 import { Types } from '../../context/VideoReducer';
 
 export default function VideoCard(props) {
   const classes = useStyles();
+  const { link, detailSize, cardSize, cardContent, bgDark, bgLight, textDescription } = classes;
   const { dispatch } = useVideoContext();
+  const { themeState } = useThemeContext();
   const { id, title, image, description, isDetailPage = false } = props;
 
   const handleWatchVideo = () => {
@@ -22,18 +25,23 @@ export default function VideoCard(props) {
 
   return (
     <>
-      <Link to={`/watch/${id}`} onClick={handleWatchVideo} className={classes.link}>
-        <Card className={isDetailPage ? classes.detailSize : classes.cardSize} data-testid="card">
+      <Link to={`/watch/${id}`} onClick={handleWatchVideo} className={link}>
+        <Card
+          className={`${isDetailPage ? detailSize : cardSize} ${
+            themeState.themeDark ? bgDark : bgLight
+          }`}
+          data-testid="card"
+        >
           <CardActionArea>
             <CardMedia component="img" alt={title} height="140" image={image} title={title} />
-            <CardContent className={classes.cardContent}>
+            <CardContent className={cardContent}>
               <Typography gutterBottom variant={isDetailPage ? 'subtitle2' : 'h6'} component="p">
                 {parse(title)}
               </Typography>
               {!isDetailPage ? (
                 <Typography
                   variant="body2"
-                  color="textSecondary"
+                  className={textDescription}
                   component="p"
                   data-testid="video-card-desc"
                 >

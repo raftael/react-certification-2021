@@ -1,4 +1,5 @@
 import { alpha, makeStyles } from '@material-ui/core/styles';
+import { BG_DARK_APPBAR, BG_LIGHT_APPBAR } from '../../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -17,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    // '&:hover': {
-    //   backgroundColor: alpha(theme.palette.common.white, 0.25),
-    // },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
@@ -68,6 +66,15 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  palette: {
+    type: 'dark',
+  },
+  bgDark: {
+    backgroundColor: BG_DARK_APPBAR,
+  },
+  bgLight: {
+    backgroundColor: BG_LIGHT_APPBAR,
   },
 }));
 

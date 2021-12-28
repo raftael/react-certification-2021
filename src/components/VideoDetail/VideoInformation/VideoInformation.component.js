@@ -9,10 +9,22 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { format } from 'date-fns';
+import { useThemeContext } from '../../../context/Theme/ThemeContext';
 import useStyles from './VideoInformation.styles';
 
 export default function VideoInformation(props) {
   const classes = useStyles();
+  const {
+    root,
+    darkAccordion,
+    lightAccordion,
+    expandIcon,
+    column,
+    secondaryHeading,
+    showMoreInfo,
+    details,
+  } = classes;
+  const { themeState } = useThemeContext();
   const { title, description, publishedAt } = props;
   const [expanded, setExpanded] = React.useState(false);
 
@@ -27,23 +39,29 @@ export default function VideoInformation(props) {
           {parse(title)}
         </Typography>
         <Divider />
-        <div className={classes.root}>
-          <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <div className={root}>
+          <Accordion
+            expanded={expanded === 'panel1'}
+            onChange={handleChange('panel1')}
+            className={themeState.themeDark ? darkAccordion : lightAccordion}
+          >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon className={expandIcon} />}
               aria-controls="panel1c-content"
               id="panel1c-header"
             >
-              <div className={classes.column}>
-                <Typography className={classes.secondaryHeading}>
+              <div className={column}>
+                <Typography className={secondaryHeading}>
                   {format(new Date(publishedAt), "MMMM d',' yyyy")}
                 </Typography>
               </div>
-              <div className={classes.column}>
-                <Typography className={classes.secondaryHeading}>Show more info...</Typography>
+              <div className={column}>
+                <Typography className={`${secondaryHeading} ${showMoreInfo}`}>
+                  {expanded ? 'Show less info...' : 'Show more info...'}
+                </Typography>
               </div>
             </AccordionSummary>
-            <AccordionDetails className={classes.details}>
+            <AccordionDetails className={details}>
               <Typography>{description}</Typography>
             </AccordionDetails>
           </Accordion>

@@ -1,6 +1,20 @@
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  COLOR_DARK_TEXT_CARD_DETAIL,
+  COLOR_LIGHT_TEXT_CARD_DETAIL,
+  BG_DARK_CARD_DETAIL,
+  BG_LIGHT_CARD_DETAIL,
+} from '../../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
+  darkAccordion: {
+    backgroundColor: BG_DARK_CARD_DETAIL,
+    color: COLOR_DARK_TEXT_CARD_DETAIL,
+  },
+  lightAccordion: {
+    backgroundColor: BG_LIGHT_CARD_DETAIL,
+    color: COLOR_LIGHT_TEXT_CARD_DETAIL,
+  },
   cardSize: {
     maxWidth: 345,
     height: 350,
@@ -17,7 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+  },
+  showMoreInfo: {
+    textAlign: 'right',
+    color: 'gray',
+  },
+  expandIcon: {
+    color: 'gray',
   },
   icon: {
     verticalAlign: 'bottom',
@@ -28,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   column: {
-    flexBasis: '33.33%',
+    flexBasis: '50%',
   },
   helper: {
     padding: theme.spacing(1, 2),

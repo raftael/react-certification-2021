@@ -2,13 +2,13 @@ import React from 'react';
 import { cleanup, render as rtlRender, screen } from '@testing-library/react';
 import { format } from 'date-fns';
 import VideoInformation from '.';
-import { VideoContextWrapper } from '../../../context/VideoContext';
+import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
-    return <VideoContextWrapper {...props} />;
+    return <ThemeContextWrapper {...props} />;
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 }

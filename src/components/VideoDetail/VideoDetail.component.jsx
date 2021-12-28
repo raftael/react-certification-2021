@@ -8,11 +8,12 @@ import RelatedVideos from './RelatedVideos/RelatedVideos.component';
 
 export default function VideoDetail({ video }) {
   const classes = useStyles();
+  const { gridRelated, grid } = classes;
 
   return (
     <div data-testid="react-player">
       <Grid container spacing={3}>
-        <Grid item xs={9} className={classes.grid}>
+        <Grid item xs={9} className={grid}>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${video.id}`}
             playing={false}
@@ -26,7 +27,7 @@ export default function VideoDetail({ video }) {
             publishedAt={video.snippet.publishedAt}
           />
         </Grid>
-        <Grid item xs={3} data-testid="related-videos-grid">
+        <Grid item xs={3} data-testid="related-videos-grid" className={gridRelated}>
           <RelatedVideos videoId={video.id} />
         </Grid>
       </Grid>

@@ -2,17 +2,22 @@ import React from 'react';
 import { cleanup, render as rtlRender, screen } from '@testing-library/react';
 import RelatedVideos from '.';
 import { VideoContextWrapper } from '../../../context/VideoContext';
+import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
-    return <VideoContextWrapper {...props} />;
+    return (
+      <ThemeContextWrapper {...props}>
+        <VideoContextWrapper {...props} />
+      </ThemeContextWrapper>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 }
 
-describe('Validating VideoDetail component', () => {
+describe('Validating loading', () => {
   beforeEach(() => {
     render(<RelatedVideos videoId="abc123" />);
   });
@@ -22,11 +27,6 @@ describe('Validating VideoDetail component', () => {
   });
 
   test('Should show loading videos text', () => {
-    expect(screen.getByText('Loading videos...').toBeInTheDocument);
+    expect(screen.getByTestId('loader').toBeInTheDocument);
   });
-
-  //   test('Should not show loading videos text', async () => {
-  //     await waitFor(() => screen.getbyRole('button'));
-  //     expect(screen.getByText().toBeInTheDocument);
-  //   });
 });
