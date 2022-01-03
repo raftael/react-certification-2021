@@ -17,12 +17,18 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0),
   },
   grid: {
-    minHeight: 300,
+    width: '100%',
+    height: 'auto',
     maxHeight: 600,
     marginTop: 40,
   },
   gridRelated: {
     marginTop: 40,
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '190px',
+      padding: '20px',
+      justifyContent: 'center',
+    },
   },
   loading: {
     textAlign: 'center',

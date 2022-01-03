@@ -60,6 +60,15 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
+  favorite: {
+    flexDirection: 'row-reverse',
+  },
+  favoriteDarkIcon: {
+    color: 'gray',
+  },
+  favoriteRedIcon: {
+    color: 'red',
+  },
 }));
 
 export default useStyles;

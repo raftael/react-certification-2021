@@ -1,22 +1,40 @@
 import React from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import DesktopMenuItem from './DesktopMenuItem';
+import { menuItems } from '../../../../config';
+import useStyles from './Menu.styles';
+import { useThemeContext } from '../../../../context/Theme/ThemeContext';
 
 export default function MenuBar(props) {
-  const isMenuOpen = Boolean(props.anchorEl);
+  const classes = useStyles();
+  const { themeState } = useThemeContext();
+  const { menu, darkMenu } = classes;
+  const { menuId, anchorEl, handleProfileMenuClose } = props;
+  console.log(anchorEl);
+  const handleMenuClose = () => {
+    handleProfileMenuClose(!anchorEl);
+  };
   const renderMenu = (
     <Menu
-      anchorEl={props.anchorEl}
+      anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={props.menuId}
+      id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={props.handleMenuClose}
+      open={Boolean(anchorEl)}
+      onClose={handleMenuClose}
       data-testid="menu"
+      className={themeState.themeDark ? darkMenu : menu}
     >
-      <MenuItem onClick={props.handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={props.handleMenuClose}>My account</MenuItem>
+      {menuItems.map((item) => (
+        <DesktopMenuItem
+          menu={item}
+          key={item.menuName}
+          ref={React.createRef()}
+          close={handleProfileMenuClose}
+          anchorEl={anchorEl}
+        />
+      ))}
     </Menu>
   );
 

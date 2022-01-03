@@ -10,8 +10,13 @@ import YoutubeService from '../../../utils/services/YoutubeService';
 import { DEVENV } from '../../../config';
 import useStyles from '../VideoDetail.styles';
 
-export default function RelatedVideos({ videoId }) {
-  const endpoint = DEVENV ? YoutubeService.devSearch : YoutubeService.getRelatedVideos;
+export default function RelatedVideos({ videoId, isFavorite }) {
+  let endpoint;
+  if (isFavorite) {
+    endpoint = YoutubeService.getFavoriteRelatedVideos;
+  } else {
+    endpoint = DEVENV ? YoutubeService.devSearch : YoutubeService.getRelatedVideos;
+  }
   const { data, loading, error } = useFetch(endpoint, videoId);
   const classes = useStyles();
   const { loader } = classes;
@@ -41,6 +46,7 @@ export default function RelatedVideos({ videoId }) {
                 description={video.snippet.description}
                 isDetail={false}
                 isDetailPage
+                isFavorite={false}
               />
             </Grid>
           </div>
@@ -52,4 +58,5 @@ export default function RelatedVideos({ videoId }) {
 
 RelatedVideos.propTypes = {
   videoId: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };

@@ -29,6 +29,7 @@ describe('Validating VideoCard component', () => {
         image="demo.jpg"
         description="test description"
         isDetailPage={false}
+        isFavorite={false}
       />
     );
     const element = screen.getByTestId('card');
@@ -43,6 +44,7 @@ describe('Validating VideoCard component', () => {
         image="demo.jpg"
         description="test description"
         isDetailPage={false}
+        isFavorite={false}
       />
     );
     expect(screen.getByText('demo')).toBeInTheDocument();
@@ -57,6 +59,7 @@ describe('Validating VideoCard component', () => {
         image="demo.jpg"
         description="test description"
         isDetailPage
+        isFavorite={false}
       />
     );
     expect(screen.getByText('demo')).not.toBe(0);

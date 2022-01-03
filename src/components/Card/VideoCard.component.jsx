@@ -17,7 +17,8 @@ export default function VideoCard(props) {
   const { link, detailSize, cardSize, cardContent, bgDark, bgLight, textDescription } = classes;
   const { dispatch } = useVideoContext();
   const { themeState } = useThemeContext();
-  const { id, title, image, description, isDetailPage = false } = props;
+  const { id, title, image, description, isDetailPage = false, isFavorite = false } = props;
+  const url = isFavorite ? 'favorites' : 'watch';
 
   const handleWatchVideo = () => {
     dispatch({ type: Types.WATCH_VIDEO, value: id });
@@ -25,7 +26,7 @@ export default function VideoCard(props) {
 
   return (
     <>
-      <Link to={`/watch/${id}`} onClick={handleWatchVideo} className={link}>
+      <Link to={`/${url}/${id}`} onClick={handleWatchVideo} className={link}>
         <Card
           className={`${isDetailPage ? detailSize : cardSize} ${
             themeState.themeDark ? bgDark : bgLight
@@ -60,10 +61,12 @@ export default function VideoCard(props) {
 
 VideoCard.defaultProps = {
   isDetailPage: PropTypes.bool,
+  isFavorite: PropTypes.bool,
 };
 
 VideoCard.propTypes = {
   isDetailPage: PropTypes.bool,
+  isFavorite: PropTypes.bool,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

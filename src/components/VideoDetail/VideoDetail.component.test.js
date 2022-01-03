@@ -3,15 +3,18 @@ import { cleanup, render as rtlRender, screen } from '@testing-library/react';
 import VideoDetail from '.';
 import { VideoContextWrapper } from '../../context/VideoContext';
 import { ThemeContextWrapper } from '../../context/Theme/ThemeContext';
+import AuthProvider from '../../context/Auth/AuthContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
     return (
-      <ThemeContextWrapper {...props}>
-        <VideoContextWrapper {...props} />
-      </ThemeContextWrapper>
+      <AuthProvider {...props}>
+        <ThemeContextWrapper {...props}>
+          <VideoContextWrapper {...props} />
+        </ThemeContextWrapper>
+      </AuthProvider>
     );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
@@ -29,7 +32,7 @@ describe('Validating VideoDetail component', () => {
   };
 
   beforeEach(() => {
-    render(<VideoDetail video={video} />);
+    render(<VideoDetail video={video} isFavorite={false} />);
   });
 
   test('Should exist react player', () => {

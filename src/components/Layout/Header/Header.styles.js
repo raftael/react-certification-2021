@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: '5px',
+    },
   },
   title: {
     display: 'none',
@@ -20,16 +23,30 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    width: '100%',
+    width: 'auto',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '5px',
+      width: '200px',
+    },
     textDecoration: 'none',
     color: 'white',
   },
+  themeIcon: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+  formControlSwitch: {
+    [theme.breakpoints.down('xs')]: {
+      marginRight: '0',
+    },
+  },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1.5),
     height: '100%',
     position: 'absolute',
     color: 'white',
@@ -56,16 +73,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionDesktop: {
-    display: 'none',
+    // display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
   },
   sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+    // display: 'flex',
+    // [theme.breakpoints.up('md')]: {
+    //   display: 'none',
+    // },
   },
   palette: {
     type: 'dark',
@@ -75,6 +92,10 @@ const useStyles = makeStyles((theme) => ({
   },
   bgLight: {
     backgroundColor: BG_LIGHT_APPBAR,
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'white',
   },
 }));
 

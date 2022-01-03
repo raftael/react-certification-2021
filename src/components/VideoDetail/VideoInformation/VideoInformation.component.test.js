@@ -3,12 +3,20 @@ import { cleanup, render as rtlRender, screen } from '@testing-library/react';
 import { format } from 'date-fns';
 import VideoInformation from '.';
 import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
+import { VideoContextWrapper } from '../../../context/VideoContext';
+import AuthProvider from '../../../context/Auth/AuthContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
-    return <ThemeContextWrapper {...props} />;
+    return (
+      <AuthProvider {...props}>
+        <VideoContextWrapper {...props}>
+          <ThemeContextWrapper {...props} />
+        </VideoContextWrapper>
+      </AuthProvider>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 }

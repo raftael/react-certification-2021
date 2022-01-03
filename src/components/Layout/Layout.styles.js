@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',
+    height: '100%',
   },
   bgLight: {
     backgroundColor: BG_LIGHT_LAYOUT,

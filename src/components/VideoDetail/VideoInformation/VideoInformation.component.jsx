@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import parse from 'html-react-parser';
@@ -9,6 +10,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { format } from 'date-fns';
+import FavoriteButton from '../FavoriteButton';
 import { useThemeContext } from '../../../context/Theme/ThemeContext';
 import useStyles from './VideoInformation.styles';
 
@@ -23,9 +25,11 @@ export default function VideoInformation(props) {
     secondaryHeading,
     showMoreInfo,
     details,
+    favorite,
   } = classes;
   const { themeState } = useThemeContext();
   const { title, description, publishedAt } = props;
+
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -33,12 +37,15 @@ export default function VideoInformation(props) {
   };
 
   return (
-    <>
+    <div className={themeState.themeDark ? darkAccordion : lightAccordion}>
       <CardContent>
         <Typography gutterBottom variant="h6" component="p">
           {parse(title)}
         </Typography>
         <Divider />
+        <CardActions disableSpacing className={favorite}>
+          <FavoriteButton />
+        </CardActions>
         <div className={root}>
           <Accordion
             expanded={expanded === 'panel1'}
@@ -67,7 +74,7 @@ export default function VideoInformation(props) {
           </Accordion>
         </div>
       </CardContent>
-    </>
+    </div>
   );
 }
 

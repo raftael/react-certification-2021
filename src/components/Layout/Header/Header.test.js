@@ -1,17 +1,23 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { cleanup, fireEvent, render as rtlRender, screen } from '@testing-library/react';
 import Header from './Header.component';
 import { VideoContextWrapper } from '../../../context/VideoContext';
 import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
+import AuthProvider from '../../../context/Auth/AuthContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
     return (
-      <ThemeContextWrapper {...props}>
-        <VideoContextWrapper {...props} />
-      </ThemeContextWrapper>
+      <BrowserRouter>
+        <AuthProvider {...props}>
+          <ThemeContextWrapper {...props}>
+            <VideoContextWrapper {...props} />
+          </ThemeContextWrapper>
+        </AuthProvider>
+      </BrowserRouter>
     );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });

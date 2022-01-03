@@ -3,15 +3,18 @@ import { cleanup, render as rtlRender, screen } from '@testing-library/react';
 import RelatedVideos from '.';
 import { VideoContextWrapper } from '../../../context/VideoContext';
 import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
+import AuthProvider from '../../../context/Auth/AuthContext';
 
 afterEach(cleanup);
 
 function render(ui, options) {
   function Wrapper(props) {
     return (
-      <ThemeContextWrapper {...props}>
-        <VideoContextWrapper {...props} />
-      </ThemeContextWrapper>
+      <AuthProvider {...props}>
+        <ThemeContextWrapper {...props}>
+          <VideoContextWrapper {...props} />
+        </ThemeContextWrapper>
+      </AuthProvider>
     );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...options });
@@ -19,7 +22,7 @@ function render(ui, options) {
 
 describe('Validating loading', () => {
   beforeEach(() => {
-    render(<RelatedVideos videoId="abc123" />);
+    render(<RelatedVideos videoId="abc123" isFavorite={false} />);
   });
 
   test('Should exist title related videos', () => {

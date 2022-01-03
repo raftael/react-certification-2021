@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header/Header.component';
+import Footer from './Footer/Footer.component';
 import useStyles from './Layout.styles';
 import { useThemeContext } from '../../context/Theme/ThemeContext';
 
@@ -13,6 +14,7 @@ function Layout({ children }) {
     <div className={`${container} ${themeState.themeDark ? bgDark : bgLight}`}>
       <Header />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }

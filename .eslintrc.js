@@ -29,5 +29,6 @@ module.exports = {
     "react/jsx-wrap-multilines": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react-hooks/exhaustive-deps": 0
   },
 };
