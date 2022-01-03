@@ -10,53 +10,77 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import useStyles from './Header.styles';
+import { Types as videoTypes } from '../../../context/VideoReducer';
+import { Types as themeTypes } from '../../../context/Theme/ThemeReducer';
+import { useVideoContext } from '../../../context/VideoContext';
+import { useThemeContext } from '../../../context/Theme/ThemeContext';
 
 export default function Header() {
   const classes = useStyles();
+  const {
+    grow,
+    bgDark,
+    bgLight,
+    menuButton,
+    search,
+    searchIcon,
+    inputInput,
+    inputRoot,
+    sectionDesktop,
+    sectionMobile,
+  } = classes;
+  const { dispatch } = useVideoContext();
+  const { themeState, themeDispatch } = useThemeContext();
+  const [query, setQuery] = useState(null);
 
-  const [state, setState] = useState({
-    checked: false,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const handleChangeTheme = (e) => {
+    themeDispatch({ type: themeTypes.CHANGE_THEME, value: e.target.checked });
+  };
+  const handleClickSearch = (e) => {
+    e.preventDefault();
+    if (query && query !== '') dispatch({ type: videoTypes.SEARCH, value: query });
   };
 
   const menuId = 'primary-search-account-menu';
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
-    <div className={classes.grow} data-testid="header">
-      <AppBar position="static">
+    <div className={grow} data-testid="header">
+      <AppBar position="static" className={themeState.themeDark ? bgDark : bgLight}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
+          <IconButton edge="start" className={menuButton} color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Wizeline…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+          <div className={search}>
+            <form type="submit" onSubmit={handleClickSearch}>
+              <div
+                className={searchIcon}
+                onClick={handleClickSearch}
+                onKeyDown={handleClickSearch}
+                role="button"
+                tabIndex={0}
+              >
+                <SearchIcon />
+              </div>
+
+              <InputBase
+                placeholder="Search..."
+                classes={{
+                  root: inputRoot,
+                  input: inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </form>
           </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div className={grow} />
+          <div className={sectionDesktop}>
             <FormControlLabel
               control={
                 <Switch
-                  checked={state.checked}
-                  onChange={handleChange}
+                  checked={themeState.themeDark}
+                  onChange={handleChangeTheme}
                   name="checked"
                   color="primary"
                   data-testid="menu-switch"
@@ -74,7 +98,7 @@ export default function Header() {
               <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
+          <div className={sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
