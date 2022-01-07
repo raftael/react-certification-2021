@@ -8,7 +8,6 @@ import useStyles from './VideoDetailLayout.styles';
 export default function VideoDetailLayout(props) {
   const { data, loading, error, isFavorite } = props;
   const classes = useStyles();
-
   if (error) {
     return <Error errorMessage={error} />;
   }

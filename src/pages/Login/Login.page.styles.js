@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { BG_DARK_APPBAR, BG_LIGHT_APPBAR } from '../../utils/constants';
 
 const useStyles = makeStyles({
   loginSection: {
@@ -9,6 +10,7 @@ const useStyles = makeStyles({
   },
   loginH1: {
     textAlign: 'center',
+    fontFamily: 'Nunito',
   },
   loginForm: {
     display: 'flex',
@@ -28,9 +30,9 @@ const useStyles = makeStyles({
     fontWeight: '700',
     fontSize: '1.2rem',
     marginBottom: '0.4rem',
+    fontFamily: 'Nunito',
   },
   formGroupInput: {
-    // color: 'white',
     fontSize: '1.5rem',
     width: '100%',
     height: '60px',
@@ -46,6 +48,8 @@ const useStyles = makeStyles({
     color: 'black',
   },
   loginFormButton: {
+    backgroundColor: BG_LIGHT_APPBAR,
+    color: 'white',
     width: '6rem',
     height: '60px',
     marginTop: '1rem',
@@ -56,8 +60,28 @@ const useStyles = makeStyles({
     borderRadius: '3px',
     cursor: 'pointer',
     '&:hover': {
-      color: '#d3d3d3',
+      backgroundColor: '#d3d3d3',
+      color: 'black',
     },
+    fontFamily: 'Nunito',
+  },
+  darkLoginFormButton: {
+    backgroundColor: BG_DARK_APPBAR,
+    color: 'white',
+    width: '6rem',
+    height: '60px',
+    marginTop: '1rem',
+    marginBottom: '10rem',
+    padding: '0.4rem 0.6rem',
+    fontSize: '1.2rem',
+    border: 'none',
+    borderRadius: '3px',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#d3d3d3',
+      color: 'black',
+    },
+    fontFamily: 'Nunito',
   },
 });
 

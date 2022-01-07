@@ -5,11 +5,13 @@ import Loader from 'react-loader-spinner';
 import VideoCard from '../Card';
 import Error from '../ErrorMessage';
 import useStyles from './VideosLayout.styles';
+import { useThemeContext } from '../../context/Theme/ThemeContext';
 
 function VideosLayout(props) {
   const { data, loading, error, isFavorite } = props;
+  const { themeState } = useThemeContext();
   const classes = useStyles();
-  const { loader, grid } = classes;
+  const { loader, grid, darkLoader } = classes;
 
   if (error) {
     return <Error errorMessage={error} />;
@@ -17,7 +19,7 @@ function VideosLayout(props) {
   return (
     <>
       {loading ? (
-        <div data-testid="loading-div" className={loader}>
+        <div data-testid="loading-div" className={themeState.themeDark ? darkLoader : loader}>
           <Loader type="Bars" color="gray" height={120} width={120} timeout={3000} />
         </div>
       ) : (
@@ -29,6 +31,7 @@ function VideosLayout(props) {
                 title={video.snippet.title}
                 image={video.snippet.thumbnails.medium.url}
                 description={video.snippet.description}
+                channel={video.snippet.channelTitle}
                 isDetailPage={false}
                 data-testid="video-card"
                 isFavorite={isFavorite}

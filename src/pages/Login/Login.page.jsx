@@ -19,6 +19,7 @@ function LoginPage() {
     formGroupInput,
     formGroupInputDarkText,
     formGroupInputLightText,
+    darkLoginFormButton,
   } = classes;
 
   function authenticate(event) {
@@ -57,7 +58,10 @@ function LoginPage() {
             />
           </label>
         </div>
-        <button type="submit" className={loginFormButton}>
+        <button
+          type="submit"
+          className={themeState.themeDark ? darkLoginFormButton : loginFormButton}
+        >
           login
         </button>
       </form>

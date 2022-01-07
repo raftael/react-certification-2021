@@ -10,7 +10,7 @@ export default function MenuBar(props) {
   const { themeState } = useThemeContext();
   const { menu, darkMenu } = classes;
   const { menuId, anchorEl, handleProfileMenuClose } = props;
-  console.log(anchorEl);
+
   const handleMenuClose = () => {
     handleProfileMenuClose(!anchorEl);
   };

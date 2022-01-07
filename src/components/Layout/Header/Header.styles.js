@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginLeft: '5px',
-      width: '200px',
+      width: '180px',
     },
     textDecoration: 'none',
     color: 'white',

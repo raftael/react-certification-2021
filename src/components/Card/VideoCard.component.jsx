@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
+import { Avatar } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -14,16 +15,36 @@ import { Types } from '../../context/VideoReducer';
 
 export default function VideoCard(props) {
   const classes = useStyles();
-  const { link, detailSize, cardSize, cardContent, bgDark, bgLight, textDescription } = classes;
+  const {
+    link,
+    detailSize,
+    cardSize,
+    cardContent,
+    bgDark,
+    bgLight,
+    textDescription,
+    titleCard,
+    darkTextDescription,
+    avatar,
+    avatarContainer,
+    channelName,
+  } = classes;
   const { dispatch } = useVideoContext();
   const { themeState } = useThemeContext();
-  const { id, title, image, description, isDetailPage = false, isFavorite = false } = props;
+  const {
+    id,
+    title,
+    image,
+    description,
+    isDetailPage = false,
+    isFavorite = false,
+    channel,
+  } = props;
   const url = isFavorite ? 'favorites' : 'watch';
 
   const handleWatchVideo = () => {
     dispatch({ type: Types.WATCH_VIDEO, value: id });
   };
-
   return (
     <>
       <Link to={`/${url}/${id}`} onClick={handleWatchVideo} className={link}>
@@ -36,18 +57,29 @@ export default function VideoCard(props) {
           <CardActionArea>
             <CardMedia component="img" alt={title} height="140" image={image} title={title} />
             <CardContent className={cardContent}>
-              <Typography gutterBottom variant={isDetailPage ? 'subtitle2' : 'h6'} component="p">
+              <Typography
+                gutterBottom
+                variant={isDetailPage ? 'subtitle2' : 'h6'}
+                component="p"
+                className={titleCard}
+              >
                 {parse(title)}
               </Typography>
+              <div className={avatarContainer}>
+                <Avatar className={avatar}>{channel.charAt(0)}</Avatar>
+                <div className={channelName}>{channel}</div>
+              </div>
               {!isDetailPage ? (
-                <Typography
-                  variant="body2"
-                  className={textDescription}
-                  component="p"
-                  data-testid="video-card-desc"
-                >
-                  {description}
-                </Typography>
+                <div>
+                  <Typography
+                    variant="body2"
+                    className={themeState.themeDark ? darkTextDescription : textDescription}
+                    component="p"
+                    data-testid="video-card-desc"
+                  >
+                    {description}
+                  </Typography>
+                </div>
               ) : (
                 ''
               )}
@@ -71,4 +103,5 @@ VideoCard.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  channel: PropTypes.string.isRequired,
 };

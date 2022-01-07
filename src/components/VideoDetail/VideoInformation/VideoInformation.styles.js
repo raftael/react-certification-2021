@@ -60,14 +60,29 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     },
   },
-  favorite: {
-    flexDirection: 'row-reverse',
-  },
   favoriteDarkIcon: {
     color: 'gray',
   },
   favoriteRedIcon: {
     color: 'red',
+  },
+  avatar: {
+    backgroundColor: 'orange',
+    marginRight: '10px',
+  },
+  avatarContainer: {
+    display: 'flex',
+  },
+  favButton: {
+    textAlign: 'end',
+  },
+  channelName: {
+    marginTop: '11px',
+    display: 'inline',
+    fontFamily: 'Nunito',
+  },
+  titleInfo: {
+    fontFamily: 'Nunito',
   },
 }));
 

@@ -22,7 +22,7 @@ export default function VideoDetail({ video, isFavorite }) {
 
   return (
     <div data-testid="react-player">
-      <Grid container spacing={5}>
+      <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={9} className={grid}>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${video.id}`}
@@ -32,13 +32,15 @@ export default function VideoDetail({ video, isFavorite }) {
             height="100%"
           />
           <VideoInformation
+            videoId={video.id}
             title={video.snippet.title}
             description={video.snippet.description}
             publishedAt={video.snippet.publishedAt}
+            channel={video.snippet.channelTitle}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3} data-testid="related-videos-grid" className={gridRelated}>
-          <RelatedVideos videoId={video.id} isFavorite={isFavorite} />
+          <RelatedVideos videoId={video.id} isFavorite={isFavorite} isDetail />
         </Grid>
       </Grid>
     </div>
@@ -56,6 +58,7 @@ VideoDetail.propTypes = {
       description: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       publishedAt: PropTypes.string.isRequired,
+      channelTitle: PropTypes.string.isRequired,
     }),
   }).isRequired,
   isFavorite: PropTypes.bool,

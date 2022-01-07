@@ -6,7 +6,6 @@ export const initialState = {
 export const Types = {
   SEARCH: 'SEARCH',
   WATCH_VIDEO: 'WATCH_VIDEO',
-  CHANGE_THEME: 'CHANGE_THEME',
 };
 
 export const VideoReducer = (state, action) => {

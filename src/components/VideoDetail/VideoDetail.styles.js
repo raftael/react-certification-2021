@@ -21,7 +21,20 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     maxHeight: 600,
     marginTop: 40,
+    [theme.breakpoints.down('xs')]: {
+      marginTop: 10,
+    },
   },
+  '& .MuiGrid-spacing-xs-5': {
+    margin: '0px',
+  },
+  [theme.breakpoints.down('xs')]: {
+    '& .MuiGrid-spacing-xs-5': {
+      margin: '-20px',
+    },
+    marginTop: 10,
+  },
+
   gridRelated: {
     marginTop: 40,
     [theme.breakpoints.down('sm')]: {

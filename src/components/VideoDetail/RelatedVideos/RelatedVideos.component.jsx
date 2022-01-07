@@ -40,13 +40,13 @@ export default function RelatedVideos({ videoId, isFavorite }) {
           <div data-testid="grid-videocard" key={video.etag}>
             <Grid item xs={12} md={12} key={video.etag}>
               <VideoCard
-                id={video.id.videoId}
+                id={isFavorite ? video.id : video.id.videoId}
                 title={video.snippet.title}
                 image={video.snippet.thumbnails.medium.url}
                 description={video.snippet.description}
-                isDetail={false}
+                channel={video.snippet.channelTitle}
                 isDetailPage
-                isFavorite={false}
+                isFavorite={isFavorite}
               />
             </Grid>
           </div>
