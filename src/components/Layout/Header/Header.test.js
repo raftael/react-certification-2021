@@ -1,17 +1,42 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { cleanup, fireEvent, render as rtlRender, screen } from '@testing-library/react';
 import Header from './Header.component';
+import { VideoContextWrapper } from '../../../context/VideoContext';
+import { ThemeContextWrapper } from '../../../context/Theme/ThemeContext';
+import AuthProvider from '../../../context/Auth/AuthContext';
+
+afterEach(cleanup);
+
+function render(ui, options) {
+  function Wrapper(props) {
+    return (
+      <BrowserRouter>
+        <AuthProvider {...props}>
+          <ThemeContextWrapper {...props}>
+            <VideoContextWrapper {...props} />
+          </ThemeContextWrapper>
+        </AuthProvider>
+      </BrowserRouter>
+    );
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...options });
+}
 
 describe('Validating Header component', () => {
+  beforeEach(() => {
+    render(<Header />);
+  });
+
   test('Should exist header div', () => {
-    const { getByTestId } = render(<Header />);
-    expect(getByTestId('header')).toBeInTheDocument();
+    const element = screen.getByTestId('header');
+    expect(element).toBeInTheDocument();
   });
 
   test('Switch control changes after click', () => {
-    const { getByTestId } = render(<Header />);
-    getByTestId('menu-switch').click();
-    fireEvent.change(getByTestId('menu-switch'), { target: { checked: true } });
-    expect(getByTestId('menu-switch')).toHaveProperty('checked', true);
+    const element = screen.getByTestId('menu-switch');
+    element.click();
+    fireEvent.change(element, { target: { checked: true } });
+    expect(element).toHaveProperty('checked', true);
   });
 });
